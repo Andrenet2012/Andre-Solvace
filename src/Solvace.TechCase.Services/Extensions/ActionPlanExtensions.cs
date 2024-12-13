@@ -10,8 +10,9 @@ public static class ActionPlanExtensions
         Name = plan.Name,
         Description = plan.Description,
         EndedAt = plan.EndedAt,
-        Id = plan.ExternalId,
-        Status = plan.ActionPlanStatusId
+        Id = plan.Id,
+        Status = plan.ActionPlanStatusId,
+        TypeName = plan.TypeName
     };
 
 }

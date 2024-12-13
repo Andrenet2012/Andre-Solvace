@@ -1,49 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
+using Solvace.TechCase.Domain.Entities.Produto.Dtos;
+using Solvace.TechCase.Repository.Interface;
 
 namespace Solvace.TechCase.API.Controllers;
 
 
 [ApiController]
-[Route("api/products")]
+[Route("api/produto")]
 public class ProductsController : ControllerBase
 {
     #region QUESTION 4
-    // TYPE YOUR RESPONSE HERE: 
+    // TYPE YOUR RESPONSE HERE: O Problema era quando criava um novo produto em memoria e fosse pesquisa já perdia a informação.
+                            // Para reslver este problema foi criar uma tabela para amarzenar a informação 
     #endregion
-    private readonly List<Product> _products;
 
-    public ProductsController()
+    private readonly IProductServices _productService;
+    public ProductsController(IProductServices productService)
     {
-        _products = new List<Product>
-            {
-                new Product { Id = 1, Name = "Laptop", Description = "High performance laptop", Price = 1200.00 },
-                new Product { Id = 2, Name = "Smartphone", Description = "Latest model smartphone", Price = 800.00 },
-                new Product { Id = 3, Name = "Headphones", Description = "Noise-cancelling headphones", Price = 150.00 },
-            };
+        _productService = productService;
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetProductById(int id)
     {
-        await Task.Delay(100);
-
-        var product = _products.FirstOrDefault(p => p.Id == id);
-        if (product == null)
-        {
-            return NotFound();
-        }
-
+        var product = await _productService.GetProdutoID(id);
         return Ok(product);
     }
 
     [HttpPost("create")]
-    public async Task<ActionResult<Product>> Create(Product product)
+    public async Task<ActionResult<Product>> Create(CreateProduct product)
     {
-        await Task.Delay(100);
-
-        _products.Add(product);
-
-        return Created($"/api/products/{product.Id}", product);
+        var result = await _productService.Create(product);
+        return Created($"/api/produto/{result.Id}", result);
     }
 }
 

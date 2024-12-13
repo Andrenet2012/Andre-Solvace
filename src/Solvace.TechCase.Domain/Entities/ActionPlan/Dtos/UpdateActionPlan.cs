@@ -7,7 +7,7 @@ using Solvace.TechCase.Domain.Entities.ActionPlan.Enums;
 
 namespace Solvace.TechCase.Domain.Entities.ActionPlan.Dtos
 {
-    public class CreateActionPlan
+    public class UpdateActionPlan
     {
 
         /// <summary>
@@ -23,15 +23,7 @@ namespace Solvace.TechCase.Domain.Entities.ActionPlan.Dtos
         [MaxLength(4000)]
         [MinLength(3)]
         public required string Description { get; set; }
-
-        public EActionPlanStatus StatusId { get; set; }
-
-        /// <summary>
-        /// The title or name of the action plan, limited to 50 characters.
-        /// </summary>
-        [MaxLength(30)]
-        [MinLength(3)]
-        public required string TypeName { get; set; }
+       
 
     }
 }

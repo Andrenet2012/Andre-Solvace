@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solvace.TechCase.Repository.Contexts;
 
@@ -10,15 +11,16 @@ using Solvace.TechCase.Repository.Contexts;
 namespace Solvace.TechCase.Repository.Migrations
 {
     [DbContext(typeof(DefaultContext))]
-    partial class DefaultContextModelSnapshot : ModelSnapshot
+    [Migration("20241211004200_AddColuna")]
+    partial class AddColuna
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
-            {
-#pragma warning disable 612, 618
-                modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
+#pragma warning disable 620, 621
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
 
-                modelBuilder.Entity("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlan", b =>
+            modelBuilder.Entity("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlan", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,9 +54,9 @@ namespace Solvace.TechCase.Repository.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("TypeName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("TEXT");
+                       .IsRequired()
+                       .HasMaxLength(30)
+                       .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -63,7 +65,7 @@ namespace Solvace.TechCase.Repository.Migrations
                     b.ToTable("ActionPlans");
                 });
 
-                modelBuilder.Entity("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlanStatus", b =>
+            modelBuilder.Entity("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlanStatus", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -92,65 +94,30 @@ namespace Solvace.TechCase.Repository.Migrations
                         new
                         {
                             Id = 1L,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 11, 29, 3, 59, 15, 567, DateTimeKind.Unspecified).AddTicks(7692), new TimeSpan(0, 0, 0, 0, 0)),
-                            ExternalId = "ced0d0a2-24b6-428a-8f83-736f78ebb65c",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 11, 4, 13, 27, 24, 538, DateTimeKind.Unspecified).AddTicks(2160), new TimeSpan(0, 0, 0, 0, 0)),
+                            ExternalId = "17b7b9ca-f00c-4567-8023-47e1c8f80971",
                             IsActive = true,
                             Name = "OPEN"
                         },
                         new
                         {
                             Id = 2L,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 11, 29, 3, 59, 15, 567, DateTimeKind.Unspecified).AddTicks(7798), new TimeSpan(0, 0, 0, 0, 0)),
-                            ExternalId = "9a9a147c-cb8b-4bb6-b683-0690a43689fc",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 11, 4, 13, 27, 24, 538, DateTimeKind.Unspecified).AddTicks(2270), new TimeSpan(0, 0, 0, 0, 0)),
+                            ExternalId = "ce5dd49b-85e9-40d0-87fa-e47327e382bf",
                             IsActive = true,
                             Name = "IN_PROGRESS"
                         },
                         new
                         {
                             Id = 3L,
-                            CreatedAt = new DateTimeOffset(new DateTime(2024, 11, 29, 3, 59, 15, 567, DateTimeKind.Unspecified).AddTicks(7824), new TimeSpan(0, 0, 0, 0, 0)),
-                            ExternalId = "42da6666-0a9d-4249-9655-f924ed681968",
+                            CreatedAt = new DateTimeOffset(new DateTime(2024, 11, 4, 13, 27, 24, 538, DateTimeKind.Unspecified).AddTicks(2310), new TimeSpan(0, 0, 0, 0, 0)),
+                            ExternalId = "8203c033-f38c-4c94-9686-a5b0d27d98d0",
                             IsActive = true,
                             Name = "COMPLETED"
                         });
                 });
 
-                modelBuilder.Entity("Solvace.TechCase.Domain.Entities.Product.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<DateTimeOffset>("CreatedAt")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(4000)
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ExternalId")
-                        .IsRequired()
-                        .HasColumnType("TEXT")
-                        .HasAnnotation("Relational:JsonPropertyName", "id");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("TEXT");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
-                });
-
-                modelBuilder.Entity("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlan", b =>
+            modelBuilder.Entity("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlan", b =>
                 {
                     b.HasOne("Solvace.TechCase.Domain.Entities.ActionPlan.ActionPlanStatus", "ActionPlanStatus")
                         .WithMany()
@@ -160,8 +127,7 @@ namespace Solvace.TechCase.Repository.Migrations
 
                     b.Navigation("ActionPlanStatus");
                 });
-#pragma warning restore 612, 618
-            }
+#pragma warning restore 620, 621
         }
     }
 }
